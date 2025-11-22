@@ -1,5 +1,5 @@
 const button = document.querySelector(".center");
-const shape = document.querySelector(".shape");
+const shape = document.querySelector(".linhas");
 
 let z = 0;
 button.addEventListener("click", () => {
