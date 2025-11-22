@@ -1,0 +1,117 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:700,300);
+
+.frame {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 400px;
+    height: 400px;
+    margin-top: -200px;
+    margin-left: -200px;
+    border-radius: 2px;
+    box-shadow: 4px 8px 16px 0 rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    background: #826d96;
+    color: #1d1d1d;
+    font-family: 'Open Sans', Helvetica, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    border: 1px solid black;
+}
+
+.center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+}
+
+.linhas {
+    width: 60px;
+    height: 8px;
+    background-color: #000000;
+    position: relative;
+    transition: background-color;
+    transition-delay: 250ms;
+
+    &::before {
+        content: "";
+        width: 60px;
+        height: 8px;
+        background-color: #000000;
+        position: absolute;
+        top: -10px;
+        --move: 10px;
+        --rot: 45deg;
+    }
+
+    &::after {
+        content: "";
+        width: 60px;
+        height: 8px;
+        background-color: #000000;
+        position: absolute;
+        top: 10px;
+        --move: -10px;
+        --rot: 135deg;
+    }
+}
+
+.linhas.opened {
+    &::before {
+        animation: drop 500ms linear;
+        animation-fill-mode: forwards;
+    }
+
+    &::after {
+        animation: drop 500ms linear;
+        animation-fill-mode: forwards;
+    }
+
+    background-color: transparent;
+}
+
+
+.linhas.closed {
+    &::before {
+        animation: pull 500ms linear;
+        animation-direction: reverse;
+    }
+
+    &::after {
+        animation: pull 500ms linear;
+        animation-direction: reverse;
+    }
+
+    background-color: #333;
+}
+
+@keyframes drop {
+    50% {
+        transform: translateY(var(--move))
+    }
+
+    100% {
+        transform: translateY(var(--move)) rotateZ(var(--rot));
+    }
+}
+
+@keyframes pull {
+    0% {
+        transform: none;
+    }
+
+    50% {
+        transform: translateY(var(--move)) rotateZ(0deg);
+    }
+
+    100% {
+        transform: translateY(var(--move)) rotateZ(var(--rot));
+    }
+
+}
